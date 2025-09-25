@@ -1,0 +1,6 @@
+@parla_metro_api_main_HostAddress = http://localhost:5130
+
+GET {{parla_metro_api_main_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
