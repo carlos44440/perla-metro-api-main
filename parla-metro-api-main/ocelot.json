@@ -1,3 +1,43 @@
 {
-  "Routes": []
+  "Routes": [
+    {
+      "RouteName": "Tickets-Passenger",
+      "DownstreamPathTemplate": "/api/tickets",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "tickets-api-deploy.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api-main/passenger-tickets",
+      "UpstreamHttpMethod": ["POST"]
+    },
+    {
+      "RouteName": "Tickets-Passenger-ById",
+      "DownstreamPathTemplate": "/api/tickets/{id:int}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "tickets-api-deploy.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api-main/passenger-tickets/{id}",
+      "UpstreamHttpMethod": ["GET", "PUT"]
+    },
+    {
+      "RouteName": "Tickets-Admin",
+      "DownstreamPathTemplate": "/api/tickets/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "tickets-api-deploy.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api-main/admin-tickets/{id}",
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
+    }
+  ]
 }
