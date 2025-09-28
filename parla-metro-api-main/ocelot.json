@@ -1,6 +1,7 @@
 {
   "Routes": [
     {
+
       "DownstreamPathTemplate": "/users",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -55,6 +56,7 @@
       }
     },
     {
+
       "DownstreamPathTemplate": "/users/login",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -64,7 +66,8 @@
       "UpstreamHttpMethod": ["POST"]  
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+
+      "DownstreamPathTemplate": "/api/tickets",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -72,7 +75,7 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/gateway/tickets/{everything}",
+      "UpstreamPathTemplate": "/gateway/tickets",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -81,7 +84,8 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "RouteName": "Routes-Service",
+      "DownstreamPathTemplate": "/api/routes",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -89,7 +93,7 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/gateway/routes/{everything}",
+      "UpstreamPathTemplate": "/api/routes",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -98,7 +102,7 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamPathTemplate": "/api/stations",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -106,7 +110,7 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/gateway/stations/{everything}",
+      "UpstreamPathTemplate": "/gateway/stations",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -117,7 +121,6 @@
   ],
   
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5000",
-    "RequestIdKey": "OcRequestId"
+    "BaseUrl": "http://localhost:5000"
   }
 }
