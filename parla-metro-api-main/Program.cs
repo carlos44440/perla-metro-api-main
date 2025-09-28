@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using parla_metro_api_main.Handlers;
-using parla_metro_api_main.Services.HttpClients;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,37 +53,6 @@ builder
     });
 
 builder.Services.AddAuthorization();
-
-// // HttpClient configurations para cada servicio
-// builder.Services.AddHttpClient<IUsersClient, UsersClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Users:BaseUrl"] ?? "http://localhost:5001";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
-
-// builder.Services.AddHttpClient<ITicketsClient, TicketsClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Tickets:BaseUrl"] ?? "http://localhost:5002";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
-
-builder.Services.AddHttpClient<IRoutesClient, RoutesClient>(client =>
-{
-    var baseUrl =
-        builder.Configuration["Services:Routes:BaseUrl"]
-        ?? "https://perla-metro-routes-service-wf9c.onrender.com";
-    client.BaseAddress = new Uri(baseUrl);
-    client.Timeout = TimeSpan.FromSeconds(30);
-});
-
-// builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Stations:BaseUrl"] ?? "http://localhost:5004";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
 
 // // Services
 // builder.Services.AddScoped<IAuthService, AuthService>();
@@ -141,7 +108,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Ocelot
-builder.Services.AddOcelot(builder.Configuration).AddDelegatingHandler<CustomHttpMessageHandler>();
+builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
 
