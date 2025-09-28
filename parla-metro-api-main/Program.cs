@@ -56,9 +56,10 @@ builder
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddHttpClient<IRoutesService, RoutesService>();
+
 // // Services
 // builder.Services.AddScoped<IAuthService, AuthService>();
-// builder.Services.AddScoped<IServiceOrchestrator, ServiceOrchestrator>();
 
 // Controllers
 builder.Services.AddControllers();
@@ -112,8 +113,6 @@ builder.Services.AddSwaggerGen(c =>
 // Ocelot
 builder.Services.AddOcelot(builder.Configuration);
 
-builder.Services.AddHttpClient<IRoutesService, RoutesService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -130,13 +129,11 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 // Middleware pipeline
 app.UseCors("AllowAll");
 
-// Custom middlewares
-// app.UseMiddleware<ErrorHandlingMiddleware>();
 // app.UseMiddleware<LoggingMiddleware>();
 
 // Authentication & Authorization
-app.UseAuthentication();
-app.UseAuthorization();
+// app.UseAuthentication();
+// app.UseAuthorization();
 
 await app.UseOcelot();
 
