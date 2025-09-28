@@ -1,31 +1,72 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/users",
-      "DownstreamScheme": "http",
+
+      "DownstreamPathTemplate": "/users",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
       ],
       "UpstreamPathTemplate": "/gateway/users",
-      "UpstreamHttpMethod": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
+      "UpstreamHttpMethod": ["POST"]  
+    },
+    {
+      "DownstreamPathTemplate": "/users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
       ],
-      "RouteClaimsRequirement": {},
-      "AddHeadersToRequest": {},
-      "AddClaimsToRequest": {},
-      "AddQueriesToRequest": {},
-      "RequestIdKey": null,
-      "FileCacheOptions": {
-        "TtlSeconds": 0
+      "UpstreamPathTemplate": "/gateway/users",
+      "UpstreamHttpMethod": ["GET"],  
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
       }
     },
     {
+      "DownstreamPathTemplate": "/users/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/{everything}",
+      "UpstreamHttpMethod": ["GET", "PUT"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/users/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/{everything}",
+      "UpstreamHttpMethod": ["DELETE"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
+      }
+    },
+    {
+
+      "DownstreamPathTemplate": "/users/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/login",
+      "UpstreamHttpMethod": ["POST"]  
+    },
+    {
+
       "DownstreamPathTemplate": "/api/tickets",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -78,6 +119,7 @@
       ]
     }
   ],
+  
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5000"
   }

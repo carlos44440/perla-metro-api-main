@@ -8,6 +8,7 @@ using parla_metro_api_main.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Configuración de Ocelot
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
@@ -51,6 +52,8 @@ builder
             ValidateAudience = false,
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero,
+            RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+            
         };
     });
 
