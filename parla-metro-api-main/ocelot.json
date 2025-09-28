@@ -9,7 +9,7 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/gateway/users/{everything}",
+      "UpstreamPathTemplate": "/gateway/users",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -34,7 +34,7 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/gateway/tickets/{everything}",
+      "UpstreamPathTemplate": "/gateway/tickets",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -43,7 +43,8 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/api/routes",
+      "RouteName": "Routes-Service",
+      "DownstreamPathTemplate": "/api/routes/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -51,14 +52,13 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/gateway/routes/{everything}",
+      "UpstreamPathTemplate": "/gateway/routes/{id}",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
         "PUT",
         "DELETE"
-      ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/stations",
@@ -69,7 +69,7 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/gateway/stations/{everything}",
+      "UpstreamPathTemplate": "/gateway/stations",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -79,7 +79,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5000",
-    "RequestIdKey": "OcRequestId"
+    "BaseUrl": "http://localhost:5000"
   }
 }

@@ -169,36 +169,4 @@ app.UseAuthorization();
 
 await app.UseOcelot();
 
-app.MapControllers();
-
-// Root endpoint
-app.MapGet(
-    "/",
-    () =>
-        Results.Ok(
-            new
-            {
-                service = "Perla Metro Main API",
-                version = "1.0.0",
-                status = "running",
-                features = new string[]
-                {
-                    "JWT Authentication",
-                    "Service Orchestration",
-                    "API Gateway (Ocelot)",
-                    "CORS Support",
-                },
-                endpoints = new string[]
-                {
-                    "/swagger",
-                    "/auth/login",
-                    "/api/users",
-                    "/api/tickets",
-                    "/api/routes",
-                    "/api/stations",
-                },
-            }
-        )
-);
-
 app.Run();
