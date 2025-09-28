@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "237d94f3-9bb2-4910-9302-55b07dfd0426",
+		"name": "Taller1ADSMainApiLocal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959431"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Jaime\",\r\n  \"lastname\": \"Perez\",\r\n  \"email\": \"Jaime1@perlametro.cl\",\r\n  \"password\": \"MuySeguro123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5130/gateway/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMWZkZmMyLTRmMjMtNGIyZC1iZTZkLWM5NGVkMTMxOTg1MSIsImVtYWlsIjoiYWRtaW5AcGVybGFtZXRyby5jbCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTA5MjMwNywiZXhwIjoxNzU5MDk5NTA3fQ.tn3hDay-nFx0tOFVZe0pkfDbRmtUo_ZqjokQ7TZKHmM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5130/gateway/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsersById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5130/gateway/users/15210eaf-f678-4535-805f-7578c1b47751",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users",
+						"15210eaf-f678-4535-805f-7578c1b47751"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUsers",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Manuel\",\r\n  \"lastname\": \"Perez\",\r\n  \"email\": \"Josepo1@perlametro.cl\",\r\n  \"password\": \"MuySeguro123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5130/gateway/users/15210eaf-f678-4535-805f-7578c1b47751",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users",
+						"15210eaf-f678-4535-805f-7578c1b47751"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUsers",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5130/gateway/users/15210eaf-f678-4535-805f-7578c1b47751",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users",
+						"15210eaf-f678-4535-805f-7578c1b47751"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
