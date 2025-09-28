@@ -1,18 +1,40 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/users",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost", 
-          "Port": 5001
+          "Host": "perla-metro-usersservice.onrender.com", 
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/users",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ],
+      "RouteClaimsRequirement": {},
+      "AddHeadersToRequest": {},
+      "AddClaimsToRequest": {},
+      "AddQueriesToRequest": {},
+      "RequestIdKey": null,
+      "FileCacheOptions": {
+        "TtlSeconds": 0
+      }
+    },
+        {
+      "DownstreamPathTemplate": "/users/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-usersservice.onrender.com", 
+          "Port": 443
         }
       ],
       "UpstreamPathTemplate": "/gateway/users/{everything}",
       "UpstreamHttpMethod": [
         "GET",
-        "POST",
         "PUT",
         "DELETE"
       ],
