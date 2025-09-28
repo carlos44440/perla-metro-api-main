@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using parla_metro_api_main.Interfaces;
+using parla_metro_api_main.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -109,6 +111,8 @@ builder.Services.AddSwaggerGen(c =>
 
 // Ocelot
 builder.Services.AddOcelot(builder.Configuration);
+
+builder.Services.AddHttpClient<IRoutesService, RoutesService>();
 
 var app = builder.Build();
 

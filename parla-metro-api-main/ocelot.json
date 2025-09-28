@@ -44,7 +44,7 @@
     },
     {
       "RouteName": "Routes-Service",
-      "DownstreamPathTemplate": "/api/routes/{id}",
+      "DownstreamPathTemplate": "/api/routes",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -52,7 +52,7 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/gateway/routes/{id}",
+      "UpstreamPathTemplate": "/api/routes",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
