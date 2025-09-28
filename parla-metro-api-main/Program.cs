@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using parla_metro_api_main.Handlers;
+using parla_metro_api_main.Services.HttpClients;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,12 +71,14 @@ builder.Services.AddAuthorization();
 //     client.Timeout = TimeSpan.FromSeconds(30);
 // });
 
-// builder.Services.AddHttpClient<IRoutesClient, RoutesClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Routes:BaseUrl"] ?? "https://perla-metro-routes-service-wf9c.onrender.com";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
+builder.Services.AddHttpClient<IRoutesClient, RoutesClient>(client =>
+{
+    var baseUrl =
+        builder.Configuration["Services:Routes:BaseUrl"]
+        ?? "https://perla-metro-routes-service-wf9c.onrender.com";
+    client.BaseAddress = new Uri(baseUrl);
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
 
 // builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
 // {
@@ -137,7 +141,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Ocelot
-builder.Services.AddOcelot(builder.Configuration);
+builder.Services.AddOcelot(builder.Configuration).AddDelegatingHandler<CustomHttpMessageHandler>();
 
 var app = builder.Build();
 
@@ -163,7 +167,8 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Controllers (deben ir antes de Ocelot)
+await app.UseOcelot();
+
 app.MapControllers();
 
 // Root endpoint
@@ -195,8 +200,5 @@ app.MapGet(
             }
         )
 );
-
-// Ocelot debe ir al final
-await app.UseOcelot();
 
 app.Run();
