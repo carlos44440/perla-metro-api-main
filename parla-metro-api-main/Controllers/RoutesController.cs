@@ -16,6 +16,7 @@ namespace parla_metro_api_main.Controllers
         }
 
         [HttpGet]
+        // [Authorize]
         public async Task<IActionResult> GetAllRoutes()
         {
             var routes = await _routeService.GetAllRoutesAsync();
