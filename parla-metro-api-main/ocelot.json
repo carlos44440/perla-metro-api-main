@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamPathTemplate": "/api/users",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -84,7 +84,8 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "RouteName": "Routes-Service",
+      "DownstreamPathTemplate": "/api/routes",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -96,7 +97,7 @@
       "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamPathTemplate": "/api/stations",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -109,7 +110,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5000",
-    "RequestIdKey": "OcRequestId"
+    "BaseUrl": "http://localhost:5000"
   }
 }
