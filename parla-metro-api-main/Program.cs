@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
@@ -6,6 +7,8 @@ using parla_metro_api_main.Services.HttpClients;
 using parla_metro_api_main.Middlewares;
 using parla_metro_api_main.Models.Requests;
 using Ocelot.Middleware;
+using parla_metro_api_main.Interfaces;
+using parla_metro_api_main.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,18 +19,6 @@ builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
-
-// CORS para frontend
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        "AllowAll",
-        policy =>
-        {
-            policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        }
-    );
-});
 
 // JWT Authentication
 var jwtKey =
@@ -52,44 +43,20 @@ builder
             ValidateAudience = false,
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero,
+            RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
         };
     });
 
 builder.Services.AddAuthorization();
 
-// // HttpClient configurations para cada servicio
-// builder.Services.AddHttpClient<IUsersClient, UsersClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Users:BaseUrl"] ?? "http://localhost:5001";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
-
-// builder.Services.AddHttpClient<ITicketsClient, TicketsClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Tickets:BaseUrl"] ?? "http://localhost:5002";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
-
-// builder.Services.AddHttpClient<IRoutesClient, RoutesClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Routes:BaseUrl"] ?? "https://perla-metro-routes-service-wf9c.onrender.com";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
-
- builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
+builder.Services.AddHttpClient<IRoutesService, RoutesService>();
+builder.Services.AddHttpClient<ITicketsService, TicketsService>();
+builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
  {
      var baseUrl = builder.Configuration["Services:Stations:BaseUrl"] ?? "https://perla-metro-stations-service-zdgq.onrender.com";
      client.BaseAddress = new Uri(baseUrl);
      client.Timeout = TimeSpan.FromSeconds(30);
  });
-
-// // Services
-// builder.Services.AddScoped<IAuthService, AuthService>();
-// builder.Services.AddScoped<IServiceOrchestrator, ServiceOrchestrator>();
-
 // Controllers
 builder.Services.AddControllers();
 
@@ -158,49 +125,6 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 // Middleware pipeline
 app.UseCors("AllowAll");
 
-// Custom middlewares
-// app.UseMiddleware<ErrorHandlingMiddleware>();
-// app.UseMiddleware<LoggingMiddleware>();
-
-// Authentication & Authorization
-app.UseAuthentication();
-app.UseAuthorization();
-
-// Controllers (deben ir antes de Ocelot)
-app.MapControllers();
-
-// Root endpoint
-app.MapGet(
-    "/",
-    () =>
-        Results.Ok(
-            new
-            {
-                service = "Perla Metro Main API",
-                version = "1.0.0",
-                status = "running",
-                features = new string[]
-                {
-                    "JWT Authentication",
-                    "Service Orchestration",
-                    "API Gateway (Ocelot)",
-                    "CORS Support",
-                    "Station Service Integration", 
-                },
-                endpoints = new string[]
-                {
-                    "/swagger",
-                    "/auth/login",
-                    "/api/users",
-                    "/api/tickets",
-                    "/api/routes",
-                    "/api/stations",
-                },
-            }
-        )
-);
-
-// Ocelot debe ir al final
 await app.UseOcelot();
 
 app.Run();

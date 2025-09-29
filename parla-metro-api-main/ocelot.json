@@ -1,49 +1,94 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/users",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost", 
-          "Port": 5001
-        }
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
       ],
-      "UpstreamPathTemplate": "/gateway/users/{everything}",
-      "UpstreamHttpMethod": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
+      "UpstreamPathTemplate": "/gateway/users",
+      "UpstreamHttpMethod": ["POST"]
+    },
+    {
+      "DownstreamPathTemplate": "/users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
       ],
-      "RouteClaimsRequirement": {},
-      "AddHeadersToRequest": {},
-      "AddClaimsToRequest": {},
-      "AddQueriesToRequest": {},
-      "RequestIdKey": null,
-      "FileCacheOptions": {
-        "TtlSeconds": 0
+      "UpstreamPathTemplate": "/gateway/users",
+      "UpstreamHttpMethod": ["GET"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
       }
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/users/{everything}",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5002
-        }
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
       ],
-      "UpstreamPathTemplate": "/gateway/tickets/{everything}",
-      "UpstreamHttpMethod": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ]
+      "UpstreamPathTemplate": "/gateway/users/{everything}",
+      "UpstreamHttpMethod": ["GET", "PUT"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamPathTemplate": "/users/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/{everything}",
+      "UpstreamHttpMethod": ["DELETE"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/users/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/gateway/users/login",
+      "UpstreamHttpMethod": ["POST"]
+    },
+    {
+      "RouteName": "Tickets-Service-NoId",
+      "DownstreamPathTemplate": "/api/tickets",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "tickets-api-deploy.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/tickets",
+      "UpstreamHttpMethod": ["GET", "POST"]
+    },
+    {
+      "RouteName": "Tickets-Service-ByID",
+      "DownstreamPathTemplate": "/api/tickets/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "tickets-api-deploy.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tickets/{id}",
+      "UpstreamHttpMethod": ["GET", "PUT", "DELETE"]
+    },
+    {
+      "RouteName": "Routes-Service",
+      "DownstreamPathTemplate": "/api/routes",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -51,13 +96,8 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/gateway/routes/{everything}",
-      "UpstreamHttpMethod": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ]
+      "UpstreamPathTemplate": "/api/routes",
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
     {
       "DownstreamPathTemplate": "/api/stations",
@@ -75,7 +115,7 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "admin"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
       },
       "RateLimitOptions": {
         "ClientWhitelist": [],
@@ -101,7 +141,7 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "user"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "user"
       }
     },
     {
@@ -120,7 +160,7 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "user"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "user"
       }
     },
     {
@@ -139,7 +179,7 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "admin"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
       }
     },
     {
@@ -158,7 +198,7 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "user"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "user"
       }
     },
     {
@@ -177,7 +217,7 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "user"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "user"
       }
     },
     {
@@ -196,7 +236,7 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "user"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "user"
       }
     },
     {
@@ -215,12 +255,12 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "role": "user"
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "user"
       }
     }
   ],
+
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5000",
-    "RequestIdKey": "OcRequestId"
+    "BaseUrl": "http://localhost:5000"
   }
 }
