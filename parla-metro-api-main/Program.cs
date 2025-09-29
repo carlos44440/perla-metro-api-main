@@ -1,28 +1,129 @@
+using System.Text;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
+using parla_metro_api_main.Services.HttpClients;
+using parla_metro_api_main.Middlewares;
+using parla_metro_api_main.Models.Requests;
 using Ocelot.Middleware;
+using parla_metro_api_main.Interfaces;
+using parla_metro_api_main.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuración de Ocelot
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
-builder.Services.AddOcelot(builder.Configuration);
 
+// Logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.SetMinimumLevel(LogLevel.Information);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// JWT Authentication
+var jwtKey =
+    builder.Configuration["JWT:Secret"] ?? "your-super-secret-key-here-minimum-32-characters-long";
+var key = Encoding.ASCII.GetBytes(jwtKey);
+
+builder
+    .Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero,
+            RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddHttpClient<IRoutesService, RoutesService>();
+builder.Services.AddHttpClient<ITicketsService, TicketsService>();
+builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
+ {
+     var baseUrl = builder.Configuration["Services:Stations:BaseUrl"] ?? "https://perla-metro-stations-service-zdgq.onrender.com";
+     client.BaseAddress = new Uri(baseUrl);
+     client.Timeout = TimeSpan.FromSeconds(30);
+ });
+// Controllers
+builder.Services.AddControllers();
+
+// API Documentation
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc(
+        "v1",
+        new()
+        {
+            Title = "Perla Metro Main API",
+            Version = "v1",
+            Description = "API principal que orquesta todos los servicios del sistema Perla Metro",
+        }
+    );
+
+    // JWT Configuration for Swagger
+    c.AddSecurityDefinition(
+        "Bearer",
+        new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+        {
+            Description =
+                "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'",
+            Name = "Authorization",
+            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+            Scheme = "Bearer",
+        }
+    );
+
+    c.AddSecurityRequirement(
+        new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+        {
+            {
+                new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                    {
+                        Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                        Id = "Bearer",
+                    },
+                },
+                new string[] { }
+            },
+        }
+    );
+});
+
+// Ocelot
+builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Configure the HTTP request pipeline
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Perla Metro Main API v1");
+        c.RoutePrefix = "swagger";
+    });
 }
 
-app.UseHttpsRedirection();
+// Middleware pipeline
+app.UseCors("AllowAll");
 
 await app.UseOcelot();
 

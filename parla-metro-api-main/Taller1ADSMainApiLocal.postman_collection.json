@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "b7be300a-e69c-40af-88b0-174b4464cf67",
+		"name": "Taller1ADSMainApiLocal Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959438"
+	},
+	"item": [
+		{
+			"name": "Routes Endpoints",
+			"item": [
+				{
+					"name": "GetAllRoutes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI3YzQ4MDZjLTI4ODEtNGM1My04ZDljLTFiMTEwZTgwNjJiYSIsImVtYWlsIjoiYWRtaW5AcGVybGFtZXRyby5jbCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTExMDA1OCwiZXhwIjoxNzU5MTE3MjU4fQ.-VajnGRwQ_8SkDCKVHYuwnf67isAHujWvWhpxDJau78",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/gateway/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"gateway",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRouteById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/gateway/routes/{{$guid}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"gateway",
+								"routes",
+								"{{$guid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateRoute",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"origin\": \"Estación Central\",\r\n  \"destination\": \"Estación Norte\",\r\n  \"startTime\": \"06:00:00\",\r\n  \"endTime\": \"06:45:00\",\r\n  \"stops\": [\"Estación Intermedia 1\", \"Estación Intermedia 2\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/gateway/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"gateway",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"origin\": \"Estación Central Actualizada\",\r\n  \"destination\": \"Estación Norte\",\r\n  \"startTime\": \"06:15:00\",\r\n  \"endTime\": \"07:00:00\",\r\n  \"stops\": [\"Nueva Estación Intermedia\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/gateway/routes/{{$guid}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"gateway",
+								"routes",
+								"{{$guid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRoute",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI3YzQ4MDZjLTI4ODEtNGM1My04ZDljLTFiMTEwZTgwNjJiYSIsImVtYWlsIjoiYWRtaW5AcGVybGFtZXRyby5jbCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTExMDA1OCwiZXhwIjoxNzU5MTE3MjU4fQ.-VajnGRwQ_8SkDCKVHYuwnf67isAHujWvWhpxDJau78",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"origin\": \"Estación Central\",\r\n  \"destination\": \"Estación Norte\",\r\n  \"startTime\": \"06:00:00\",\r\n  \"endTime\": \"06:45:00\",\r\n  \"stops\": [\"Estación Intermedia 1\", \"Estación Intermedia 2\"]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/gateway/routes/{{$guid}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"gateway",
+								"routes",
+								"{{$guid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Jaime\",\r\n  \"lastname\": \"Perez\",\r\n  \"email\": \"Jaime1@perlametro.cl\",\r\n  \"password\": \"MuySeguro123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5130/gateway/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMWZkZmMyLTRmMjMtNGIyZC1iZTZkLWM5NGVkMTMxOTg1MSIsImVtYWlsIjoiYWRtaW5AcGVybGFtZXRyby5jbCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTA5MjMwNywiZXhwIjoxNzU5MDk5NTA3fQ.tn3hDay-nFx0tOFVZe0pkfDbRmtUo_ZqjokQ7TZKHmM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5130/gateway/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsersById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5130/gateway/users/15210eaf-f678-4535-805f-7578c1b47751",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users",
+						"15210eaf-f678-4535-805f-7578c1b47751"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUsers",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Manuel\",\r\n  \"lastname\": \"Perez\",\r\n  \"email\": \"Josepo1@perlametro.cl\",\r\n  \"password\": \"MuySeguro123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5130/gateway/users/15210eaf-f678-4535-805f-7578c1b47751",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users",
+						"15210eaf-f678-4535-805f-7578c1b47751"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUsers",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5130/gateway/users/15210eaf-f678-4535-805f-7578c1b47751",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5130",
+					"path": [
+						"gateway",
+						"users",
+						"15210eaf-f678-4535-805f-7578c1b47751"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
