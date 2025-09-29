@@ -22,3 +22,5 @@ El patron de diseño usado es el Modelo-Vista-Controlador (MVC), es un patrón d
 3) ejecutamos el comando: dotnet restore
 
 4) iniciamos el proyecto con el comando: dotnet run
+
+5) El proyecto ya se encuentra configurado para consumir los servicios desplegados por los integrantes, y se pueden encontrar colecciones en postman para probar los endpoints
