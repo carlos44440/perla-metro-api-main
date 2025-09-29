@@ -60,21 +60,121 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/api/stations",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/gateway/stations/{everything}",
-      "UpstreamHttpMethod": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ]
+      "UpstreamPathTemplate": "/gateway/stations",
+      "UpstreamHttpMethod": ["GET"],
+      "RouteClaimsRequirement": {},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 30
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/stations",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/stations",
+      "UpstreamHttpMethod": ["POST"],
+      "RouteClaimsRequirement": {}
+    },
+    {
+      "DownstreamPathTemplate": "/api/stations/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/stations/{id}",
+      "UpstreamHttpMethod": ["GET", "PUT"],
+      "RouteClaimsRequirement": {}
+    },
+    {
+      "DownstreamPathTemplate": "/api/stations/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/stations/{id}",
+      "UpstreamHttpMethod": ["DELETE"],
+      "RouteClaimsRequirement": {},
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/stations/deleted",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/stations/deleted",
+      "UpstreamHttpMethod": ["GET"],
+      "RouteClaimsRequirement": {}
+    },
+    {
+      "DownstreamPathTemplate": "/api/stations/{id}/restore",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/stations/{id}/restore",
+      "UpstreamHttpMethod": ["POST"],
+      "RouteClaimsRequirement": {}
+    },
+    {
+      "DownstreamPathTemplate": "/health",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/stations/health",
+      "UpstreamHttpMethod": ["GET"],
+      "RouteClaimsRequirement": {}
+    },
+    {
+      "DownstreamPathTemplate": "/info",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-stations-service-zdgq.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/stations/info",
+      "UpstreamHttpMethod": ["GET"],
+      "RouteClaimsRequirement": {}
     }
   ],
   "GlobalConfiguration": {

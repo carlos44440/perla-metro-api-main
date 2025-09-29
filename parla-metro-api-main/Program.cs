@@ -2,6 +2,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
+using parla_metro_api_main.Services.HttpClients;
+using parla_metro_api_main.Middlewares;
+using parla_metro_api_main.Models.Requests;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -76,12 +79,12 @@ builder.Services.AddAuthorization();
 //     client.Timeout = TimeSpan.FromSeconds(30);
 // });
 
-// builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
-// {
-//     var baseUrl = builder.Configuration["Services:Stations:BaseUrl"] ?? "http://localhost:5004";
-//     client.BaseAddress = new Uri(baseUrl);
-//     client.Timeout = TimeSpan.FromSeconds(30);
-// });
+ builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
+ {
+     var baseUrl = builder.Configuration["Services:Stations:BaseUrl"] ?? "https://perla-metro-stations-service-zdgq.onrender.com";
+     client.BaseAddress = new Uri(baseUrl);
+     client.Timeout = TimeSpan.FromSeconds(30);
+ });
 
 // // Services
 // builder.Services.AddScoped<IAuthService, AuthService>();
@@ -182,6 +185,7 @@ app.MapGet(
                     "Service Orchestration",
                     "API Gateway (Ocelot)",
                     "CORS Support",
+                    "Station Service Integration", 
                 },
                 endpoints = new string[]
                 {
