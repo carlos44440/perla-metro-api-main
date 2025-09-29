@@ -70,9 +70,12 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations",
       "UpstreamHttpMethod": ["GET"],
-      "RouteClaimsRequirement": {},
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "admin"
       },
       "RateLimitOptions": {
         "ClientWhitelist": [],
@@ -93,7 +96,13 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations",
       "UpstreamHttpMethod": ["POST"],
-      "RouteClaimsRequirement": {}
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "user"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/stations/{id}",
@@ -106,7 +115,13 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations/{id}",
       "UpstreamHttpMethod": ["GET", "PUT"],
-      "RouteClaimsRequirement": {}
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "user"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/stations/{id}",
@@ -119,9 +134,12 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations/{id}",
       "UpstreamHttpMethod": ["DELETE"],
-      "RouteClaimsRequirement": {},
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "admin"
       }
     },
     {
@@ -135,7 +153,13 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations/deleted",
       "UpstreamHttpMethod": ["GET"],
-      "RouteClaimsRequirement": {}
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "user"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/stations/{id}/restore",
@@ -148,7 +172,13 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations/{id}/restore",
       "UpstreamHttpMethod": ["POST"],
-      "RouteClaimsRequirement": {}
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "user"
+      }
     },
     {
       "DownstreamPathTemplate": "/health",
@@ -161,7 +191,13 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations/health",
       "UpstreamHttpMethod": ["GET"],
-      "RouteClaimsRequirement": {}
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "user"
+      }
     },
     {
       "DownstreamPathTemplate": "/info",
@@ -174,7 +210,13 @@
       ],
       "UpstreamPathTemplate": "/gateway/stations/info",
       "UpstreamHttpMethod": ["GET"],
-      "RouteClaimsRequirement": {}
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "role": "user"
+      }
     }
   ],
   "GlobalConfiguration": {
