@@ -46,6 +46,7 @@ builder
 builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient<IRoutesService, RoutesService>();
+builder.Services.AddHttpClient<ITicketsService, TicketsService>();
 
 // Controllers
 builder.Services.AddControllers();
