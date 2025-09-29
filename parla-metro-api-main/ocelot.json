@@ -9,7 +9,7 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/gateway/users/{everything}",
+      "UpstreamPathTemplate": "/gateway/users",
       "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"],
       "RouteClaimsRequirement": {},
       "AddHeadersToRequest": {},
@@ -21,28 +21,17 @@
       }
     },
     {
-      "RouteName": "Tickets-Passenger",
+      "RouteName": "Tickets-Service-NoId",
       "DownstreamPathTemplate": "/api/tickets",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-          "Host": "tickets-api-deploy.onrender.com",
-          "Port": 443
-        }
+        { "Host": "tickets-api-deploy.onrender.com", "Port": 443 }
       ],
-      "UpstreamPathTemplate": "/gateway/passenger-tickets",
-      "UpstreamHttpMethod": ["POST"],
-      "RouteClaimsRequirement": {},
-      "AddHeadersToRequest": {},
-      "AddClaimsToRequest": {},
-      "AddQueriesToRequest": {},
-      "RequestIdKey": null,
-      "FileCacheOptions": {
-        "TtlSeconds": 0
-      }
+      "UpstreamPathTemplate": "/api/tickets",
+      "UpstreamHttpMethod": ["GET", "POST"]
     },
     {
-      "RouteName": "Tickets-Passenger-ById",
+      "RouteName": "Tickets-Service-ByID",
       "DownstreamPathTemplate": "/api/tickets/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -51,37 +40,8 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/gateway/passenger-tickets/{id}",
-      "UpstreamHttpMethod": ["GET", "PUT"],
-      "RouteClaimsRequirement": {},
-      "AddHeadersToRequest": {},
-      "AddClaimsToRequest": {},
-      "AddQueriesToRequest": {},
-      "RequestIdKey": null,
-      "FileCacheOptions": {
-        "TtlSeconds": 0
-      }
-    },
-    {
-      "RouteName": "Tickets-Admin",
-      "DownstreamPathTemplate": "/api/tickets/{id}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "tickets-api-deploy.onrender.com",
-          "Port": 443
-        }
-      ],
-      "UpstreamPathTemplate": "/gateway/admin-tickets/{id}",
-      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"],
-      "RouteClaimsRequirement": {},
-      "AddHeadersToRequest": {},
-      "AddClaimsToRequest": {},
-      "AddQueriesToRequest": {},
-      "RequestIdKey": null,
-      "FileCacheOptions": {
-        "TtlSeconds": 0
-      }
+      "UpstreamPathTemplate": "/api/tickets/{id}",
+      "UpstreamHttpMethod": ["GET", "PUT", "DELETE"]
     },
     {
       "RouteName": "Routes-Service",
@@ -93,7 +53,7 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/gateway/routes/{everything}",
+      "UpstreamPathTemplate": "/api/routes",
       "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
     {
@@ -105,7 +65,7 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/gateway/stations/{everything}",
+      "UpstreamPathTemplate": "/gateway/stations",
       "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     }
   ],
