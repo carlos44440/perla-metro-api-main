@@ -12,3 +12,13 @@ La arquitectura usada es la arquitectura SOA, o Arquitectura Orientada a Servici
 
 ## Patron de diseño
 El patron de diseño usado es el Modelo-Vista-Controlador (MVC), es un patrón de arquitectura de software que separa la aplicación en tres componentes principales, cada uno con responsabilidades bien definidas. Esta separación permite organizar mejor el código, facilitar el mantenimiento y mejorar la escalabilidad de la aplicación.
+
+## Instalacion y configuracion
+
+1) clonamos el proyecto con: git clone https://github.com/carlos44440/perla-metro-api-main.git
+
+2) abrimos visual studio code en la carpeta del proyecto o entramos por comandos usando cd .\parla-metro-api-main\  y luego nuevamente ejecutamos cd .\parla-metro-api-main\
+
+3) ejecutamos el comando: dotnet restore
+
+4) iniciamos el proyecto con el comando: dotnet run
