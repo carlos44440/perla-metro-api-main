@@ -16,18 +16,6 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
 
-// CORS para frontend
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        "AllowAll",
-        policy =>
-        {
-            policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        }
-    );
-});
-
 // JWT Authentication
 var jwtKey =
     builder.Configuration["JWT:Secret"] ?? "your-super-secret-key-here-minimum-32-characters-long";
@@ -51,6 +39,7 @@ builder
             ValidateAudience = false,
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero,
+            RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
         };
     });
 
@@ -58,9 +47,6 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient<IRoutesService, RoutesService>();
 builder.Services.AddHttpClient<ITicketsService, TicketsService>();
-
-// // Services
-// builder.Services.AddScoped<IAuthService, AuthService>();
 
 // Controllers
 builder.Services.AddControllers();
@@ -129,12 +115,6 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 
 // Middleware pipeline
 app.UseCors("AllowAll");
-
-// app.UseMiddleware<LoggingMiddleware>();
-
-// Authentication & Authorization
-// app.UseAuthentication();
-// app.UseAuthorization();
 
 await app.UseOcelot();
 
