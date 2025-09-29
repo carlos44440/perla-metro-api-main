@@ -4,19 +4,29 @@
       "DownstreamPathTemplate": "/users",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+        {
+          "Host": "perla-metro-usersservice.onrender.com",
+          "Port": 443
+        }
       ],
       "UpstreamPathTemplate": "/gateway/users",
-      "UpstreamHttpMethod": ["POST"]
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
     },
     {
       "DownstreamPathTemplate": "/users",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+        {
+          "Host": "perla-metro-usersservice.onrender.com",
+          "Port": 443
+        }
       ],
       "UpstreamPathTemplate": "/gateway/users",
-      "UpstreamHttpMethod": ["GET"],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -29,10 +39,16 @@
       "DownstreamPathTemplate": "/users/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+        {
+          "Host": "perla-metro-usersservice.onrender.com",
+          "Port": 443
+        }
       ],
       "UpstreamPathTemplate": "/gateway/users/{everything}",
-      "UpstreamHttpMethod": ["GET", "PUT"],
+      "UpstreamHttpMethod": [
+        "GET",
+        "PUT"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -42,10 +58,15 @@
       "DownstreamPathTemplate": "/users/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+        {
+          "Host": "perla-metro-usersservice.onrender.com",
+          "Port": 443
+        }
       ],
       "UpstreamPathTemplate": "/gateway/users/{everything}",
-      "UpstreamHttpMethod": ["DELETE"],
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -58,30 +79,45 @@
       "DownstreamPathTemplate": "/users/login",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        { "Host": "perla-metro-usersservice.onrender.com", "Port": 443 }
+        {
+          "Host": "perla-metro-usersservice.onrender.com",
+          "Port": 443
+        }
       ],
       "UpstreamPathTemplate": "/gateway/users/login",
-      "UpstreamHttpMethod": ["POST"]
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
     },
     {
       "RouteName": "Tickets-Service-NoId-Passenger",
       "DownstreamPathTemplate": "/api/tickets",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        { "Host": "tickets-api-deploy.onrender.com", "Port": 443 }
+        {
+          "Host": "tickets-api-deploy.onrender.com",
+          "Port": 443
+        }
       ],
       "UpstreamPathTemplate": "/api/tickets",
-      "UpstreamHttpMethod": ["POST"]
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
     },
     {
       "RouteName": "Tickets-Service-NoId-Admin",
       "DownstreamPathTemplate": "/api/tickets",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        { "Host": "tickets-api-deploy.onrender.com", "Port": 443 }
+        {
+          "Host": "tickets-api-deploy.onrender.com",
+          "Port": 443
+        }
       ],
       "UpstreamPathTemplate": "/api/tickets",
-      "UpstreamHttpMethod": ["GET"],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -101,7 +137,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/tickets/{id}",
-      "UpstreamHttpMethod": ["DELETE"],
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -121,10 +159,12 @@
         }
       ],
       "UpstreamPathTemplate": "/api/tickets/{id}",
-      "UpstreamHttpMethod": ["GET", "PUT"]
+      "UpstreamHttpMethod": [
+        "GET",
+        "PUT"
+      ]
     },
     {
-      "RouteName": "Routes-Service",
       "DownstreamPathTemplate": "/api/routes",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -133,8 +173,67 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/api/routes",
-      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
+      "UpstreamPathTemplate": "/gateway/routes",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/routes",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-routes-service-wf9c.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/routes",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/routes",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-routes-service-wf9c.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/routes",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/routes/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "perla-metro-routes-service-wf9c.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/routes/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "PUT"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/stations",
@@ -146,7 +245,9 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations",
-      "UpstreamHttpMethod": ["GET"],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -172,7 +273,9 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations",
-      "UpstreamHttpMethod": ["POST"],
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -191,7 +294,10 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations/{id}",
-      "UpstreamHttpMethod": ["GET", "PUT"],
+      "UpstreamHttpMethod": [
+        "GET",
+        "PUT"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -210,7 +316,9 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations/{id}",
-      "UpstreamHttpMethod": ["DELETE"],
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -229,7 +337,9 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations/deleted",
-      "UpstreamHttpMethod": ["GET"],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -248,7 +358,9 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations/{id}/restore",
-      "UpstreamHttpMethod": ["POST"],
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -267,7 +379,9 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations/health",
-      "UpstreamHttpMethod": ["GET"],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -286,7 +400,9 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/stations/info",
-      "UpstreamHttpMethod": ["GET"],
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -296,7 +412,6 @@
       }
     }
   ],
-
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5000"
   }
