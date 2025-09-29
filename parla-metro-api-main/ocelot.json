@@ -64,17 +64,34 @@
       "UpstreamHttpMethod": ["POST"]
     },
     {
-      "RouteName": "Tickets-Service-NoId",
+      "RouteName": "Tickets-Service-NoId-Passenger",
       "DownstreamPathTemplate": "/api/tickets",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         { "Host": "tickets-api-deploy.onrender.com", "Port": 443 }
       ],
       "UpstreamPathTemplate": "/api/tickets",
-      "UpstreamHttpMethod": ["GET", "POST"]
+      "UpstreamHttpMethod": ["POST"]
     },
     {
-      "RouteName": "Tickets-Service-ByID",
+      "RouteName": "Tickets-Service-NoId-Admin",
+      "DownstreamPathTemplate": "/api/tickets",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        { "Host": "tickets-api-deploy.onrender.com", "Port": 443 }
+      ],
+      "UpstreamPathTemplate": "/api/tickets",
+      "UpstreamHttpMethod": ["GET"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
+      }
+    },
+    {
+      "RouteName": "Tickets-Service-ByID-Admin",
       "DownstreamPathTemplate": "/api/tickets/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -84,7 +101,27 @@
         }
       ],
       "UpstreamPathTemplate": "/api/tickets/{id}",
-      "UpstreamHttpMethod": ["GET", "PUT", "DELETE"]
+      "UpstreamHttpMethod": ["DELETE"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "admin"
+      }
+    },
+    {
+      "RouteName": "Tickets-Service-ByID-Passenger",
+      "DownstreamPathTemplate": "/api/tickets/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "tickets-api-deploy.onrender.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tickets/{id}",
+      "UpstreamHttpMethod": ["GET", "PUT"]
     },
     {
       "RouteName": "Routes-Service",
