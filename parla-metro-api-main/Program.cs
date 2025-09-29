@@ -1,7 +1,11 @@
 using System.Text;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
+using parla_metro_api_main.Services.HttpClients;
+using parla_metro_api_main.Middlewares;
+using parla_metro_api_main.Models.Requests;
 using Ocelot.Middleware;
 using parla_metro_api_main.Interfaces;
 using parla_metro_api_main.Services;
@@ -47,7 +51,12 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient<IRoutesService, RoutesService>();
 builder.Services.AddHttpClient<ITicketsService, TicketsService>();
-
+builder.Services.AddHttpClient<IStationsClient, StationsClient>(client =>
+ {
+     var baseUrl = builder.Configuration["Services:Stations:BaseUrl"] ?? "https://perla-metro-stations-service-zdgq.onrender.com";
+     client.BaseAddress = new Uri(baseUrl);
+     client.Timeout = TimeSpan.FromSeconds(30);
+ });
 // Controllers
 builder.Services.AddControllers();
 
